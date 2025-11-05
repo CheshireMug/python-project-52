@@ -2,10 +2,10 @@ install:
 	uv sync
 
 collectstatic:
-	uv run manage.py collectstatic --noinput
+	uv run python3 manage.py collectstatic --noinput
 
 migrate:
-	uv run manage.py migrate
+	uv run python3 manage.py migrate
 
 build:
 	./build.sh
