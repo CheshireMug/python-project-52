@@ -91,7 +91,18 @@ class UserDeleteView(LoginRequiredMixin, UserIsSelfMixin, DeleteView):
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users:users_list')
 
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, 'Пользователь успешно удалён.')
+    def post(self, request, *args, **kwargs):
+        # получаем объект
+        self.object = self.get_object()
+
+        # сообщение ДО удаления
+        messages.success(request, 'Пользователь успешно удалён.')
+
+        # логаут ДО удаления
         logout(request)
-        return super().delete(request, *args, **kwargs)
+
+        # удаляем пользователя
+        self.object.delete()
+
+        # редирект
+        return redirect(self.success_url)
