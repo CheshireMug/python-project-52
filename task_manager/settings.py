@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'task_manager',
     'task_manager.users.apps.UsersConfig',
+    'task_manager.statuses.apps.StatusesConfig',
     'django_bootstrap5',
 ]
 
@@ -94,9 +95,9 @@ MESSAGE_TAGS = {
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        default="sqlite:///" + str(BASE_DIR / "db.sqlite3"),
         conn_max_age=600,
-        ssl_require=True
+        ssl_require=False,
     )
 }
 
