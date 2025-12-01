@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'task_manager',
     'task_manager.users.apps.UsersConfig',
     'task_manager.statuses.apps.StatusesConfig',
+    'task_manager.tasks.apps.TasksConfig',
     'django_bootstrap5',
 ]
 

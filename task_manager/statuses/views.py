@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.views.generic import ListView, CreateView,\
     UpdateView, DeleteView
-from django.http import HttpResponse
 from .models import Status
 from .forms import StatusCreateForm
 from django.shortcuts import redirect
