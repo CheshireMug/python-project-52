@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
 
 # Create your models here.
 class Task(models.Model):
@@ -28,6 +29,13 @@ class Task(models.Model):
         on_delete=models.PROTECT,   # запрет на удаление автора
         related_name='created_tasks',
         verbose_name='Автор'
+    )
+
+    labels = models.ManyToManyField(
+        Label,
+        related_name="tasks",
+        blank=True,
+        verbose_name="Метки"
     )
 
     created_at = models.DateTimeField(auto_now_add=True)

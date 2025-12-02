@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'task_manager.users.apps.UsersConfig',
     'task_manager.statuses.apps.StatusesConfig',
     'task_manager.tasks.apps.TasksConfig',
+    'task_manager.labels.apps.LabelsConfig',
     'django_bootstrap5',
 ]
 
@@ -80,6 +81,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'task_manager.wsgi.application'
 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 

@@ -1,0 +1,17 @@
+from django import forms
+from .models import Label
+
+
+class LabelCreateForm(forms.ModelForm):
+    class Meta:
+        model = Label
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Имя'
+            })
+        }
+        labels = {
+            'name': 'Имя'
+        }

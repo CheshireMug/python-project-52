@@ -1,6 +1,7 @@
 from django import forms
 from .models import Task
 from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
 from task_manager.users.models import User
 
 
@@ -12,6 +13,7 @@ class TaskCreateForm(forms.ModelForm):
             "description",
             "status",
             "executor",
+            "labels",
         ]
 
         widgets = {
@@ -29,6 +31,9 @@ class TaskCreateForm(forms.ModelForm):
             "executor": forms.Select(attrs={
                 "class": "form-select",
             }),
+            "labels": forms.SelectMultiple(attrs={
+                "class": "form-select",
+            }),
         }
 
         labels = {
@@ -36,4 +41,5 @@ class TaskCreateForm(forms.ModelForm):
             "description": "Описание",
             "status": "Статус",
             "executor": "Исполнитель",
+            "labels": "Метки",
         }
