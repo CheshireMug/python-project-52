@@ -56,7 +56,7 @@ class UsersCRUDTest(TestCase):
         self.assertEqual(self.user.first_name, 'Joe')
 
         # флеш сообщение
-        self.assertContains(response, 'Данные пользователя обновлены.')
+        self.assertContains(response, 'Данные пользователя обновлены')
 
     def test_user_delete(self):
         self.client.login(username='john', password='12345')
@@ -72,4 +72,4 @@ class UsersCRUDTest(TestCase):
         self.assertRedirects(response, reverse('users:users_list'))
 
         # флеш сообщение
-        self.assertContains(response, 'Пользователь успешно удалён.')
+        self.assertContains(response, 'Пользователь успешно удалён')

@@ -50,7 +50,7 @@ class TaskDeleteView(DeleteView):
         # сообщение ДО удаления
         messages.success(request, 'Задача успешно удалена')
 
-        # удаляем статус
+        # удаляем задачу
         self.object.delete()
 
         # редирект

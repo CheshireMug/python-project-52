@@ -49,14 +49,17 @@ class LableDeleteView(LoginRequiredMixin, DeleteView):
     login_url = 'login'
 
     def post(self, request, *args, **kwargs):
-        # получаем объект
         self.object = self.get_object()
 
-        # сообщение ДО удаления
+        # Проверяем, связана ли метка с задачами
+        if self.object.tasks.exists():
+            messages.error(
+                request,
+                'Невозможно удалить метку, потому что она используется'
+            )
+            return redirect(self.success_url)
+
+        # Если не связана — удаляем
         messages.success(request, 'Метка успешно удалена')
-
-        # удаляем статус
         self.object.delete()
-
-        # редирект
         return redirect(self.success_url)
