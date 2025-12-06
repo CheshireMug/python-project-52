@@ -1,0 +1,85 @@
+<div class="card mb-3">
+    <div class="card-body bg-light">
+        <form method="get" class="form-inline center">
+
+            <div class="mb-3">
+                <label for="id_status" class="form-label">Статус</label>
+                <select
+                    name="status"
+                    id="id_status"
+                    class="form-select ml-2 mr-3 {% if form_active %}is-valid{% endif %}"
+                >
+                    <option value="">---------</option>
+
+                    {% for st in statuses %}
+                        <option value="{{ st.id }}"
+                            {% if request.GET.status == st.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ st.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_executor" class="form-label">Исполнитель</label>
+                <select
+                    name="executor"
+                    id="id_executor"
+                    class="form-select ml-2 mr-3 {% if form_active %}is-valid{% endif %}"
+                >
+                    <option value="">---------</option>
+
+                    {% for ex in executors %}
+                        <option value="{{ ex.id }}"
+                            {% if request.GET.executor == ex.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ ex.get_full_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_label" class="form-label">Метка</label>
+                <select
+                    name="label"
+                    id="id_label"
+                    class="form-select ml-2 mr-3 {% if form_active %}is-valid{% endif %}"
+                >
+                    <option value="">---------</option>
+
+                    {% for lb in labels %}
+                        <option value="{{ lb.id }}"
+                            {% if request.GET.label == lb.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ lb.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input
+                    type="checkbox"
+                    name="self_tasks"
+                    id="id_self_tasks"
+                    class="form-check-input mr-3 {% if form_active %}is-valid{% endif %}"
+                    {% if request.GET.self_tasks %}checked{% endif %}
+                >
+                <label for="id_self_tasks" class="form-check-label">
+                    Только свои задачи
+                </label>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Показать">
+
+        </form>
+    </div>
+</div>

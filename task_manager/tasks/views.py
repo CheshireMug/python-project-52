@@ -5,6 +5,10 @@ from .models import Task
 from django.http import HttpResponse
 from .models import Task
 from .forms import TaskCreateForm
+from .filters import TaskFilterForm
+from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
+from task_manager.users.models import User
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
@@ -13,6 +17,38 @@ class TasksListView(ListView):
     model = Task
     context_object_name = 'tasks'
     template_name = 'tasks/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["statuses"] = Status.objects.all()
+        context["executors"] = User.objects.all()
+        context["labels"] = Label.objects.all()   
+        context["form"] = TaskFilterForm(self.request.GET or None)
+        context["form_active"] = bool(self.request.GET)
+        return context
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+
+        # читать параметры из request.GET
+        status = self.request.GET.get("status")
+        executor = self.request.GET.get("executor")
+        label = self.request.GET.get("label")
+        self_tasks = self.request.GET.get("self_tasks")
+
+        if status:
+            qs = qs.filter(status=status)
+
+        if executor:
+            qs = qs.filter(executor=executor)
+
+        if label:
+            qs = qs.filter(labels=label)
+
+        if self_tasks:
+            qs = qs.filter(author=self.request.user)
+
+        return qs
 
 
 class TaskCreateView(CreateView):
