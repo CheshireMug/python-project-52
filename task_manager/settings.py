@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import dj_database_url
+# from dotenv import load_dotenv
 import os
+
+# load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,10 +53,12 @@ INSTALLED_APPS = [
     'task_manager.tasks.apps.TasksConfig',
     'task_manager.labels.apps.LabelsConfig',
     'django_bootstrap5',
+    'rollbar',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -60,6 +66,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ROLLBAR = {
+    'access_token': '3aba20b0d41f41dea0428c244c3cbfa8',
+    'environment': 'development' if DEBUG else 'production',
+    'branch': 'main',
+    'root': str(BASE_DIR),
+}
 
 ROOT_URLCONF = 'task_manager.urls'
 
