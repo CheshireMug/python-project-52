@@ -29,10 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+xo5f1&j^)=x^@tvy(iq!814fqjl@k-^u@nq3veh7outfee^k1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*',
     'localhost',
     '127.0.0.1',
     'python-project-52-ukjn.onrender.com',
@@ -69,10 +68,10 @@ MIDDLEWARE = [
 ]
 
 ROLLBAR = {
-    'access_token': '3aba20b0d41f41dea0428c244c3cbfa8',
+    'access_token': '2a879e92585f43b3b05458b242cdca13',
     'environment': 'development' if DEBUG else 'production',
-    'branch': 'main',
-    'root': str(BASE_DIR),
+    'code_version': '1.0',
+    'root': BASE_DIR,
 }
 
 ROOT_URLCONF = 'task_manager.urls'

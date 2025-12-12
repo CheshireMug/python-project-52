@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from task_manager.users.forms import LoginForm
-from .views import IndexView
+from .views import IndexView, trigger_error
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
+    path('trigger-error/', trigger_error, name='trigger_error'),
     path('users/', include("task_manager.users.urls")),
     path('statuses/', include("task_manager.statuses.urls")),
     path('tasks/', include("task_manager.tasks.urls")),

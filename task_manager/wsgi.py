@@ -8,9 +8,16 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
+import rollbar
+from django.conf import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'task_manager.settings')
+
+rollbar.init(
+    access_token=settings.ROLLBAR['access_token'],
+    environment=settings.ROLLBAR['environment'],
+    root=settings.ROLLBAR['root'],
+)
 
 application = get_wsgi_application()
