@@ -14,3 +14,7 @@ render-start:
 	uv sync
 	uv run gunicorn task_manager.wsgi
 #	gunicorn task_manager.wsgi
+
+test:
+	uv run python manage.py migrate
+	uv run pytest -vv tests
