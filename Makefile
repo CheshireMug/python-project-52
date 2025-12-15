@@ -15,6 +15,8 @@ render-start:
 	uv run gunicorn task_manager.wsgi
 #	gunicorn task_manager.wsgi
 
-test:
-	uv run python manage.py migrate
-	uv run pytest -vv tests
+setup:
+	cp -n .env.example .env || true
+	make install
+	make collectstatic
+	make migrate
