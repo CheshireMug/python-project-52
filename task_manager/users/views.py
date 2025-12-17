@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin,\
 from django.contrib.auth import logout
 from django.core.exceptions import PermissionDenied
 from .forms import RegistrationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import ListView, CreateView,\
     UpdateView, DeleteView
 from django.shortcuts import redirect
@@ -21,6 +21,14 @@ class CustomLoginView(LoginView):
         response = super().form_valid(form)
         messages.success(self.request, "Вы залогинены")
         return response
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('index')
+
+    def dispatch(self, request, *args, **kwargs):
+        messages.info(request, "Вы разлогинены")
+        return super().dispatch(request, *args, **kwargs)
 
 
 # Create your views here.
