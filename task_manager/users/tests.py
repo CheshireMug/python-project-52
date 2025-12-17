@@ -31,8 +31,7 @@ class UsersCRUDTest(TestCase):
         self.assertContains(response, "Пользователь успешно зарегистрирован")
 
     def test_user_update(self):
-        self.client.force_login(self.user)
-        # self.client.login(username="john", password="12345")
+        self.client.login(username="john", password="12345")
 
         url = reverse("users:users_update", kwargs={"pk": self.user.pk})
 
@@ -55,21 +54,12 @@ class UsersCRUDTest(TestCase):
         self.assertContains(response, "Данные пользователя обновлены")
 
     def test_user_delete(self):
-        self.client.force_login(self.user)
+        self.client.login(username="john", password="12345")
 
         url = reverse("users:users_delete", kwargs={"pk": self.user.pk})
+
         response = self.client.post(url, follow=True)
 
-        self.assertTrue(User.objects.filter(pk=self.user.pk).exists())
-        self.assertContains(response, "Невозможно удалить пользователя")
-
-        # self.client.force_login(self.user)
-        # self.client.login(username="john", password="12345")
-
-        # url = reverse("users:users_delete", kwargs={"pk": self.user.pk})
-
-        # response = self.client.post(url, follow=True)
-
-        # self.assertFalse(User.objects.filter(username="john").exists())
-        # self.assertRedirects(response, reverse("users:users_list"))
-        # self.assertContains(response, "Пользователь успешно удалён")
+        self.assertFalse(User.objects.filter(username="john").exists())
+        self.assertRedirects(response, reverse("users:users_list"))
+        self.assertContains(response, "Пользователь успешно удалён")

@@ -61,8 +61,7 @@ class LabelsCRUDTest(TestCase):
     def test_label_delete(self):
         self.client.login(username="user", password="test123")
 
-        # удаляем метку без связей (LabelA / LabelB не подойдут)
-        free_label = Label.objects.get(name="LabelA")
+        free_label = Label.objects.get(name="FreeLabel")
 
         response = self.client.post(
             reverse("labels:labels_delete", args=[free_label.pk])
@@ -70,6 +69,18 @@ class LabelsCRUDTest(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Label.objects.filter(pk=free_label.pk).exists())
+    # def test_label_delete(self):
+    #     self.client.login(username="user", password="test123")
+
+    #     # удаляем метку без связей (LabelA / LabelB не подойдут)
+    #     free_label = Label.objects.get(name="LabelA")
+
+    #     response = self.client.post(
+    #         reverse("labels:labels_delete", args=[free_label.pk])
+    #     )
+
+    #     self.assertEqual(response.status_code, 302)
+    #     self.assertFalse(Label.objects.filter(pk=free_label.pk).exists())
 
     # Запрет удаления метки, связанной с задачей
     def test_label_delete_protected(self):
