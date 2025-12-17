@@ -11,25 +11,28 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from django.contrib.messages import constants as messages
 from pathlib import Path
-import dj_database_url
-# from dotenv import load_dotenv
 import os
 
-# load_dotenv()
+from dotenv import load_dotenv
+import dj_database_url
+from django.contrib.messages import constants as messages
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+load_dotenv(BASE_DIR / ".env")
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+xo5f1&j^)=x^@tvy(iq!814fqjl@k-^u@nq3veh7outfee^k1'
+SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -68,7 +71,7 @@ MIDDLEWARE = [
 ]
 
 ROLLBAR = {
-    'access_token': '2a879e92585f43b3b05458b242cdca13',
+    'access_token': os.getenv("ROLLBAR_ACCESS_TOKEN"),
     'environment': 'development' if DEBUG else 'production',
     'code_version': '1.0',
     'root': BASE_DIR,

@@ -1,0 +1,17 @@
+[
+  {
+    "model": "tasks.task_labels",
+    "pk": 1,
+    "fields": { "task": 1, "label": 2 }
+  },
+  {
+    "model": "tasks.task_labels",
+    "pk": 2,
+    "fields": { "task": 2, "label": 3 }
+  },
+  {
+    "model": "tasks.task_labels",
+    "pk": 3,
+    "fields": { "task": 3, "label": 1 }
+  }
+]
