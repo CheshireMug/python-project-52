@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from task_manager.users.views import CustomLoginView
 from task_manager.users.forms import LoginForm
 from .views import IndexView, trigger_error
 
@@ -30,12 +31,9 @@ urlpatterns = [
     path('labels/', include("task_manager.labels.urls")),
     path(
         'login/',
-        auth_views.LoginView.as_view(
-            template_name='registration/login.html',
-            authentication_form=LoginForm
-        ),
+        CustomLoginView.as_view(authentication_form=LoginForm),
         name='login'
-        ),
+    ),
     path(
         'logout/', auth_views.LogoutView.as_view(),
         name='logout'

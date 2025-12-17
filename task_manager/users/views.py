@@ -4,12 +4,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin,\
 from django.contrib.auth import logout
 from django.core.exceptions import PermissionDenied
 from .forms import RegistrationForm
+from django.contrib.auth.views import LoginView
 from django.views.generic import ListView, CreateView,\
     UpdateView, DeleteView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from .forms import UserUpdateForm
 from .models import User
+
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Вы залогинены")
+        return response
+
 
 # Create your views here.
 class UsersListView(ListView):
