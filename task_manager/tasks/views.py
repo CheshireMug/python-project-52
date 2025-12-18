@@ -82,7 +82,7 @@ class TaskUpdateView(UpdateView):
 
 class TaskDeleteView(DeleteView):
     model = Task
-    template_name = 'tasks/delete.html'
+    # template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks:tasks_list')
 
     def get(self, request, *args, **kwargs):
