@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.views.generic import ListView, CreateView,\
     UpdateView, DeleteView
+from django.views.generic import DetailView
 from .models import Task
 from django.http import HttpResponse
 from .models import Task
@@ -61,6 +62,11 @@ class TaskCreateView(CreateView):
         form.instance.author = self.request.user
         messages.success(self.request, "Задача успешно создана")
         return super().form_valid(form)
+
+
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = 'tasks/detail.html'
 
 
 class TaskUpdateView(UpdateView):
