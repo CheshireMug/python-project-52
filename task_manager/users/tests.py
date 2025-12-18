@@ -51,7 +51,7 @@ class UsersCRUDTest(TestCase):
 
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, "Joe")
-        self.assertContains(response, "Данные пользователя обновлены")
+        self.assertContains(response, "Пользователь успешно изменен")
 
     def test_user_delete(self):
         self.client.login(username="john", password="12345")
