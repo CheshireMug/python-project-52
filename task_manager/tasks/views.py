@@ -85,15 +85,20 @@ class TaskDeleteView(DeleteView):
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks:tasks_list')
 
-    def post(self, request, *args, **kwargs):
-        # получаем объект
+    def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-
-        # сообщение ДО удаления
         messages.success(request, 'Задача успешно удалена')
-
-        # удаляем задачу
         self.object.delete()
-
-        # редирект
         return redirect(self.success_url)
+    # def post(self, request, *args, **kwargs):
+    #     # получаем объект
+    #     self.object = self.get_object()
+
+    #     # сообщение ДО удаления
+    #     messages.success(request, 'Задача успешно удалена')
+
+    #     # удаляем задачу
+    #     self.object.delete()
+
+    #     # редирект
+    #     return redirect(self.success_url)
