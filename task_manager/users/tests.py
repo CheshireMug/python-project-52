@@ -62,4 +62,4 @@ class UsersCRUDTest(TestCase):
 
         self.assertFalse(User.objects.filter(username="john").exists())
         self.assertRedirects(response, reverse("users:users_list"))
-        self.assertContains(response, "Пользователь успешно удалён")
+        self.assertContains(response, "Пользователь успешно удален")

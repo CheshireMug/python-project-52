@@ -92,7 +92,7 @@ class UserDeleteView(LoginRequiredMixin, UserIsSelfMixin, DeleteView):
         self.object = self.get_object()
 
         # сообщение ДО удаления
-        messages.success(request, 'Пользователь успешно удалён')
+        messages.success(request, 'Пользователь успешно удален')
 
         # логаут ДО удаления
         logout(request)
