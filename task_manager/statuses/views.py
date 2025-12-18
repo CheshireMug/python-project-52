@@ -3,6 +3,7 @@ from django.views.generic import ListView, CreateView,\
     UpdateView, DeleteView
 from .models import Status
 from .forms import StatusCreateForm
+from django.db.models.deletion import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
@@ -44,14 +45,15 @@ class StatusDeleteView(DeleteView):
     success_url = reverse_lazy('statuses:statuses_list')
 
     def post(self, request, *args, **kwargs):
-        # получаем объект
         self.object = self.get_object()
 
-        # сообщение ДО удаления
-        messages.success(request, 'Статус успешно удален')
+        try:
+            self.object.delete()
+            messages.success(request, 'Статус успешно удален')
+        except ProtectedError:
+            messages.error(
+                request,
+                'Невозможно удалить статус, потому что он используется'
+            )
 
-        # удаляем статус
-        self.object.delete()
-
-        # редирект
         return redirect(self.success_url)
