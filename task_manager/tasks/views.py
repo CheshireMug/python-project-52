@@ -89,11 +89,18 @@ class TaskDeleteView(DeleteView):
         # получаем объект
         self.object = self.get_object()
 
+        if self.object.author != request.user:
+            messages.error(
+                request,
+                'Задачу может удалить только ее автор'
+            )
+            return redirect(self.success_url)
+
+        # сообщение ДО удаления
+        messages.success(request, 'Задача успешно удалена')
+
         # удаляем задачу
         self.object.delete()
-
-        # сообщение
-        messages.success(request, 'Задача успешно удалена')
 
         # редирект
         return redirect(self.success_url)
