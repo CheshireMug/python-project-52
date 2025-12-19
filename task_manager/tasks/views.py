@@ -3,8 +3,6 @@ from django.views.generic import ListView, CreateView,\
     UpdateView, DeleteView
 from django.views.generic import DetailView
 from .models import Task
-from django.http import HttpResponse
-from .models import Task
 from .forms import TaskCreateForm
 from .filters import TaskFilterForm
 from task_manager.statuses.models import Status
@@ -23,7 +21,7 @@ class TasksListView(ListView):
         context = super().get_context_data(**kwargs)
         context["statuses"] = Status.objects.all()
         context["executors"] = User.objects.all()
-        context["labels"] = Label.objects.all()   
+        context["labels"] = Label.objects.all()
         context["form"] = TaskFilterForm(self.request.GET or None)
         context["form_active"] = bool(self.request.GET)
         return context

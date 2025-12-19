@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin,\
     UserPassesTestMixin
 from django.contrib.auth import logout
-from django.core.exceptions import PermissionDenied
 from .forms import RegistrationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import ListView, CreateView,\
@@ -64,10 +63,16 @@ class UserIsSelfMixin(UserPassesTestMixin):
 
     def handle_no_permission(self):
         if not self.request.user.is_authenticated:
-            messages.error(self.request, 'Вы не авторизованы! Пожалуйста, выполните вход.')
+            messages.error(
+                self.request,
+                'Вы не авторизованы! Пожалуйста, выполните вход.'
+                )
             return redirect(reverse_lazy('login'))
 
-        messages.error(self.request, 'У вас нет прав для изменения этого пользователя.')
+        messages.error(
+            self.request,
+            'У вас нет прав для изменения этого пользователя.'
+            )
         return redirect(reverse_lazy('users:users_list'))
 
 

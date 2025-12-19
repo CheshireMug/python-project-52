@@ -22,4 +22,4 @@ setup:
 	make migrate
 
 lint:
-	uv run ruff check gendiff
+	uv run ruff check task_manager
