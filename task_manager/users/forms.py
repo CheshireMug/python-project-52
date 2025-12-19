@@ -62,8 +62,10 @@ class RegistrationForm(UserCreationForm):
             'class': 'form-control',
             'placeholder': 'Пароль',
         }),
-        help_text='<ul><li>Ваш пароль должен содержать' + \
-        ' как минимум 3 символа.</li></ul>'
+        help_text=(
+            '<ul><li>Ваш пароль должен содержать'
+            ' как минимум 3 символа.</li></ul>'
+        )
     )
 
     password2 = forms.CharField(
@@ -127,8 +129,10 @@ class UserUpdateForm(UserCreationForm):
             'placeholder': 'Пароль',
         }),
         required=False,
-        help_text='<ul><li>Ваш пароль должен содержать' + \
+        help_text=(
+            '<ul><li>Ваш пароль должен содержать'
             ' как минимум 3 символа.</li></ul>'
+            )
     )
 
     password2 = forms.CharField(
