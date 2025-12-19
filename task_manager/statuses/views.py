@@ -8,6 +8,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 # Create your views here.
+
+
 class StatusesListView(ListView):
     model = Status
     context_object_name = 'statuses'

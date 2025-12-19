@@ -12,6 +12,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 # Create your views here.
+
+
 class TasksListView(ListView):
     model = Task
     context_object_name = 'tasks'

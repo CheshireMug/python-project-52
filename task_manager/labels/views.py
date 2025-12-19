@@ -8,6 +8,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 # Create your views here.
+
+
 class LabelsListView(LoginRequiredMixin, ListView):
     model = Label
     context_object_name = 'labels'
