@@ -20,3 +20,6 @@ setup:
 	make install
 	make collectstatic
 	make migrate
+
+lint:
+	uv run ruff check gendiff

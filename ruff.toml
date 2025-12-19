@@ -1,0 +1,25 @@
+line-length = 80
+target-version = "py312"
+
+exclude = [
+    ".venv",
+    "venv",
+    "env",
+    "build",
+    "dist",
+    "__pycache__",
+    "migrations",
+    "code/build",
+]
+
+[lint]
+select = [
+    "E",   # pycodestyle errors (E302, E501 и т.д.)
+    "F",   # pyflakes (unused imports, redefinitions)
+    "W",   # warnings
+]
+
+ignore = [
+    "E203",  # конфликт с форматированием
+    "E266",  # лишние комментарии
+]
